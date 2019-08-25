@@ -1,0 +1,604 @@
+
+Setting environment for using XAMPP for Windows.
+Raj@DESKTOP-M86K3N9 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.38-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| form               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| student            |
+| test               |
++--------------------+
+7 rows in set (0.04 sec)
+
+MariaDB [(none)]> create database raj;
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [(none)]> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| form               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| raj                |
+| student            |
+| test               |
++--------------------+
+8 rows in set (0.00 sec)
+
+MariaDB [(none)]> use raj;
+Database changed
+MariaDB [raj]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [raj]> create table student(usn varchar(10),name varchar(20),sem integer,sec chae(1));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chae(1))' at line 1
+MariaDB [raj]> create table student(usn varchar(10),name varchar(20),sem integer,sec char(1));
+Query OK, 0 rows affected (0.35 sec)
+
+MariaDB [raj]> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| usn   | varchar(10) | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| sem   | int(11)     | YES  |     | NULL    |       |
+| sec   | char(1)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.10 sec)
+
+MariaDB [raj]> insert into student values('4mh17cs001','ajay',5,'c');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [raj]> select * from student;
++------------+------+------+------+
+| usn        | name | sem  | sec  |
++------------+------+------+------+
+| 4mh17cs001 | ajay |    5 | c    |
++------------+------+------+------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> insert into student values('4mh17cs002','akshay',5,'c');
+Query OK, 1 row affected (0.09 sec)
+
+MariaDB [raj]> insert into student values('4mh17cs069','rakshith',5,'b');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [raj]> insert into student values('4mh17cs070','rohith',5,'b');
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [raj]> insert into student values('4mh17cs098','sudeep',5,'a');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [raj]> select * from student;
++------------+----------+------+------+
+| usn        | name     | sem  | sec  |
++------------+----------+------+------+
+| 4mh17cs001 | ajay     |    5 | c    |
+| 4mh17cs002 | akshay   |    5 | c    |
+| 4mh17cs069 | rakshith |    5 | b    |
+| 4mh17cs070 | rohith   |    5 | b    |
+| 4mh17cs098 | sudeep   |    5 | a    |
++------------+----------+------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from student where sec='a';
++------------+--------+------+------+
+| usn        | name   | sem  | sec  |
++------------+--------+------+------+
+| 4mh17cs098 | sudeep |    5 | a    |
++------------+--------+------+------+
+1 row in set (0.02 sec)
+
+MariaDB [raj]> select * from student where sec='a' or sec='b';
++------------+----------+------+------+
+| usn        | name     | sem  | sec  |
++------------+----------+------+------+
+| 4mh17cs069 | rakshith |    5 | b    |
+| 4mh17cs070 | rohith   |    5 | b    |
+| 4mh17cs098 | sudeep   |    5 | a    |
++------------+----------+------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from student where sec!='b';
++------------+--------+------+------+
+| usn        | name   | sem  | sec  |
++------------+--------+------+------+
+| 4mh17cs001 | ajay   |    5 | c    |
+| 4mh17cs002 | akshay |    5 | c    |
+| 4mh17cs098 | sudeep |    5 | a    |
++------------+--------+------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [raj]> select count(*) from student where sec='a';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.03 sec)
+
+MariaDB [raj]> select count(*) from student where sec='b';
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> update student set name='ajay kumar' where usn='4mh17cs001';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [raj]> select * from student;
++------------+------------+------+------+
+| usn        | name       | sem  | sec  |
++------------+------------+------+------+
+| 4mh17cs001 | ajay kumar |    5 | c    |
+| 4mh17cs002 | akshay     |    5 | c    |
+| 4mh17cs069 | rakshith   |    5 | b    |
+| 4mh17cs070 | rohith     |    5 | b    |
+| 4mh17cs098 | sudeep     |    5 | a    |
++------------+------------+------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> alter table student change sem semester int;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+MariaDB [raj]> alter table student add fee float;
+Query OK, 0 rows affected (0.51 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
+| fee      | float       | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+MariaDB [raj]> select * from student;
++------------+------------+----------+------+------+
+| usn        | name       | semester | sec  | fee  |
++------------+------------+----------+------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    | NULL |
+| 4mh17cs002 | akshay     |        5 | c    | NULL |
+| 4mh17cs069 | rakshith   |        5 | b    | NULL |
+| 4mh17cs070 | rohith     |        5 | b    | NULL |
+| 4mh17cs098 | sudeep     |        5 | a    | NULL |
++------------+------------+----------+------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> update student set fee=1000 where usn='4mh17cs001';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [raj]> select * from student;
++------------+------------+----------+------+------+
+| usn        | name       | semester | sec  | fee  |
++------------+------------+----------+------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    | 1000 |
+| 4mh17cs002 | akshay     |        5 | c    | NULL |
+| 4mh17cs069 | rakshith   |        5 | b    | NULL |
+| 4mh17cs070 | rohith     |        5 | b    | NULL |
+| 4mh17cs098 | sudeep     |        5 | a    | NULL |
++------------+------------+----------+------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> update student set fee=2000 where usn='4mh17cs002';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [raj]> update student set fee=3000 where usn='4mh17cs069';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [raj]> update student set fee=4000 where usn='4mh17cs070';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [raj]> update student set fee=5000 where usn='4mh17cs071';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+MariaDB [raj]> select * from student;
++------------+------------+----------+------+------+
+| usn        | name       | semester | sec  | fee  |
++------------+------------+----------+------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    | 1000 |
+| 4mh17cs002 | akshay     |        5 | c    | 2000 |
+| 4mh17cs069 | rakshith   |        5 | b    | 3000 |
+| 4mh17cs070 | rohith     |        5 | b    | 4000 |
+| 4mh17cs098 | sudeep     |        5 | a    | NULL |
++------------+------------+----------+------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> update student set fee=2000 5here usn='4mh17cs098';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '5here usn='4mh17cs098'' at line 1
+MariaDB [raj]> update student set fee=5000 where usn='4mh17cs098';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [raj]> select * from student;
++------------+------------+----------+------+------+
+| usn        | name       | semester | sec  | fee  |
++------------+------------+----------+------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    | 1000 |
+| 4mh17cs002 | akshay     |        5 | c    | 2000 |
+| 4mh17cs069 | rakshith   |        5 | b    | 3000 |
+| 4mh17cs070 | rohith     |        5 | b    | 4000 |
+| 4mh17cs098 | sudeep     |        5 | a    | 5000 |
++------------+------------+----------+------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> select min(fee) from student;
++----------+
+| min(fee) |
++----------+
+|     1000 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> select max(fee) from student;
++----------+
+| max(fee) |
++----------+
+|     5000 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> select avg(fee) from student;
++----------+
+| avg(fee) |
++----------+
+|     3000 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> select avg(fee) as avg-fee from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-fee from student' at line 1
+MariaDB [raj]> select avg(fee) as avg_fee from student;
++---------+
+| avg_fee |
++---------+
+|    3000 |
++---------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
+| fee      | float       | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+MariaDB [raj]> alter table student modify fee float;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
+| fee      | float       | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+MariaDB [raj]> alter table student modify fee int;
+Query OK, 5 rows affected (0.74 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
+| fee      | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+MariaDB [raj]> alter table student drop fee;
+Query OK, 0 rows affected (0.54 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+MariaDB [raj]> select * from student;
++------------+------------+----------+------+
+| usn        | name       | semester | sec  |
++------------+------------+----------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    |
+| 4mh17cs002 | akshay     |        5 | c    |
+| 4mh17cs069 | rakshith   |        5 | b    |
+| 4mh17cs070 | rohith     |        5 | b    |
+| 4mh17cs098 | sudeep     |        5 | a    |
++------------+------------+----------+------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> delete from student where name='akshay';
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [raj]> select * from student;
++------------+------------+----------+------+
+| usn        | name       | semester | sec  |
++------------+------------+----------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    |
+| 4mh17cs069 | rakshith   |        5 | b    |
+| 4mh17cs070 | rohith     |        5 | b    |
+| 4mh17cs098 | sudeep     |        5 | a    |
++------------+------------+----------+------+
+4 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from student order by usn desc;
++------------+------------+----------+------+
+| usn        | name       | semester | sec  |
++------------+------------+----------+------+
+| 4mh17cs098 | sudeep     |        5 | a    |
+| 4mh17cs070 | rohith     |        5 | b    |
+| 4mh17cs069 | rakshith   |        5 | b    |
+| 4mh17cs001 | ajay kumar |        5 | c    |
++------------+------------+----------+------+
+4 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from student order by usn asc;
++------------+------------+----------+------+
+| usn        | name       | semester | sec  |
++------------+------------+----------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    |
+| 4mh17cs069 | rakshith   |        5 | b    |
+| 4mh17cs070 | rohith     |        5 | b    |
+| 4mh17cs098 | sudeep     |        5 | a    |
++------------+------------+----------+------+
+4 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from student order by usn,name;
++------------+------------+----------+------+
+| usn        | name       | semester | sec  |
++------------+------------+----------+------+
+| 4mh17cs001 | ajay kumar |        5 | c    |
+| 4mh17cs069 | rakshith   |        5 | b    |
+| 4mh17cs070 | rohith     |        5 | b    |
+| 4mh17cs098 | sudeep     |        5 | a    |
++------------+------------+----------+------+
+4 rows in set (0.00 sec)
+
+MariaDB [raj]> delete from student;
+Query OK, 4 rows affected (0.05 sec)
+
+MariaDB [raj]> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| usn      | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| semester | int(11)     | YES  |     | NULL    |       |
+| sec      | char(1)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+MariaDB [raj]> select * from student;
+Empty set (0.00 sec)
+
+MariaDB [raj]> drop student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'student' at line 1
+MariaDB [raj]> drop table student;
+Query OK, 0 rows affected (0.28 sec)
+
+MariaDB [raj]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [raj]> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [raj]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [raj]> create table emp;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [raj]> create table emp(eid unique not null,ename varchar(10),dept varchar(10),int salary);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'unique not null,ename varchar(10),dept varchar(10),int salary)' at line 1
+MariaDB [raj]> create table emp(eid not null unique ,ename varchar(10),dept varchar(10),int salary);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'not null unique ,ename varchar(10),dept varchar(10),int salary)' at line 1
+MariaDB [raj]> create table emp(eid varchar(20) not null unique,ename varchar(10),dept varchar(10),int salary);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int salary)' at line 1
+MariaDB [raj]> create table emp(eid int not null unique,ename varchar(10),dept varchar(10),salary int);
+Query OK, 0 rows affected (0.26 sec)
+
+MariaDB [raj]> show tables;
++---------------+
+| Tables_in_raj |
++---------------+
+| emp           |
++---------------+
+1 row in set (0.00 sec)
+
+MariaDB [raj]> insert into emp values(111,'raj','testing',40000);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [raj]> insert into emp values(222,'sudeep','testing',10000);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [raj]> insert into emp values(333,'sushith','debug',50000);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [raj]> insert into emp values(444,'supreeth','testing',40000);
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [raj]> insert into emp values(555,'rohith','testing',50000);
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [raj]> select * from emp;
++-----+----------+---------+--------+
+| eid | ename    | dept    | salary |
++-----+----------+---------+--------+
+| 111 | raj      | testing |  40000 |
+| 222 | sudeep   | testing |  10000 |
+| 333 | sushith  | debug   |  50000 |
+| 444 | supreeth | testing |  40000 |
+| 555 | rohith   | testing |  50000 |
++-----+----------+---------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from emp order by eid desc;
++-----+----------+---------+--------+
+| eid | ename    | dept    | salary |
++-----+----------+---------+--------+
+| 555 | rohith   | testing |  50000 |
+| 444 | supreeth | testing |  40000 |
+| 333 | sushith  | debug   |  50000 |
+| 222 | sudeep   | testing |  10000 |
+| 111 | raj      | testing |  40000 |
++-----+----------+---------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> select * from emp;
++-----+----------+---------+--------+
+| eid | ename    | dept    | salary |
++-----+----------+---------+--------+
+| 111 | raj      | testing |  40000 |
+| 222 | sudeep   | testing |  10000 |
+| 333 | sushith  | debug   |  50000 |
+| 444 | supreeth | testing |  40000 |
+| 555 | rohith   | testing |  50000 |
++-----+----------+---------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [raj]> select dept,sum(salary) from employee group by dept;
+ERROR 1146 (42S02): Table 'raj.employee' doesn't exist
+MariaDB [raj]> select dept,sum(salary) from emp group by dept;
++---------+-------------+
+| dept    | sum(salary) |
++---------+-------------+
+| debug   |       50000 |
+| testing |      140000 |
++---------+-------------+
+2 rows in set (0.02 sec)
+
+MariaDB [raj]> select dept,sum(salary),avg(salary),min(salary),max(salary) from emp group by dept;
++---------+-------------+-------------+-------------+-------------+
+| dept    | sum(salary) | avg(salary) | min(salary) | max(salary) |
++---------+-------------+-------------+-------------+-------------+
+| debug   |       50000 |  50000.0000 |       50000 |       50000 |
+| testing |      140000 |  35000.0000 |       10000 |       50000 |
++---------+-------------+-------------+-------------+-------------+
+2 rows in set (0.00 sec)
+
+MariaDB [raj]> select dept,count(*) as no-employees from employee group by dept;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-employees from employee group by dept' at line 1
+MariaDB [raj]> select dept,count(*) as no-employees from emp group by dept;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-employees from emp group by dept' at line 1
+MariaDB [raj]> select dept,count(*) as no_employees from emp group by dept;
++---------+--------------+
+| dept    | no_employees |
++---------+--------------+
+| debug   |            1 |
+| testing |            4 |
++---------+--------------+
+2 rows in set (0.00 sec)
+
+MariaDB [raj]> select dept,count(*) as no_employees from emp group by dept having count(*>2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '>2)' at line 1
+MariaDB [raj]> select dept,count(*) as no_employees from emp group by dept having count(* > 2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '> 2)' at line 1
+MariaDB [raj]> select dept,count(*) as no_employees from emp group by dept having count(*)> 2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [raj]> select dept from emp where salary>20000 group by dept;
++---------+
+| dept    |
++---------+
+| debug   |
+| testing |
++---------+
+2 rows in set (0.00 sec)
+
+MariaDB [raj]> select dept from emp where salary>20000 group by dept having count(*>2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '>2)' at line 1
+MariaDB [raj]> select dept,count(*) from emp where salary>20000 group by dept having count(*>2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '>2)' at line 1
+MariaDB [raj]> select dept from employee where salary>20000;
+ERROR 1146 (42S02): Table 'raj.employee' doesn't exist
+MariaDB [raj]> select dept from emp where salary>20000;
++---------+
+| dept    |
++---------+
+| testing |
+| debug   |
+| testing |
+| testing |
++---------+
+4 rows in set (0.00 sec)
+
+MariaDB [raj]> create table student(usn int primary key,name varchar(20),sem int,sec char(1),branch varchar(10));
+Query OK, 0 rows affected (0.62 sec)
+
+MariaDB [raj]> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| usn    | int(11)     | NO   | PRI | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| sem    | int(11)     | YES  |     | NULL    |       |
+| sec    | char(1)     | YES  |     | NULL    |       |
+| branch | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.04 sec)
+
+MariaDB [raj]> create table accounts(recno int primary key,fee int,foriegn key(usn) references student(usn));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'key(usn) references student(usn))' at line 1
